@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>team-E.C.H.O</title>
+<meta name="description" content="team-E.C.H.O builds AI systems that run on real hardware, notice real things, and act without waiting to be asked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ---------- Tokens ---------- */
+  :root{
+    --void: #07060d;
+    --void-2: #0b0912;
+    --panel: #110d1d;
+    --panel-line: rgba(155,102,246,0.16);
+    --violet: #6d33c9;
+    --violet-bright: #a06bff;
+    --blue: #29d3ff;
+    --blue-dim: #1c7f9c;
+    --ink: #ece7f7;
+    --muted: #9791ac;
+    --focus: #c9b6ff;
+    --font-display: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --void: #07060d; --void-2: #0b0912; --panel: #110d1d; --panel-line: rgba(155,102,246,0.16);
+      --violet: #6d33c9; --violet-bright: #a06bff; --blue: #29d3ff; --blue-dim: #1c7f9c;
+      --ink: #ece7f7; --muted: #9791ac; --focus: #c9b6ff;
+    }
+  }
+  :root[data-theme="dark"]{
+    --void: #07060d; --void-2: #0b0912; --panel: #110d1d; --panel-line: rgba(155,102,246,0.16);
+    --violet: #6d33c9; --violet-bright: #a06bff; --blue: #29d3ff; --blue-dim: #1c7f9c;
+    --ink: #ece7f7; --muted: #9791ac; --focus: #c9b6ff;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ background: var(--void); }
+  body{
+    margin:0;
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    background-image:
+      linear-gradient(rgba(160,107,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(41,211,255,0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  img{ max-width: 100%; }
+  a{ color: var(--blue); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  :focus-visible{ outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    padding: 1.6rem 0 0;
+  }
+  .topbar .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .wordmark{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .topbar a.jump{
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--muted);
+    border-bottom: 1px solid transparent;
+  }
+  .topbar a.jump:hover{
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom-color: var(--blue);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 4.5rem 0 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top: -180px; right: -160px;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle, rgba(109,51,201,0.28), rgba(41,211,255,0.08) 45%, transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero .wrap{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.5rem;
+    align-items:center;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+    line-height: 1.05;
+    margin: 0 0 1.1rem;
+    letter-spacing: 0.005em;
+    background: linear-gradient(95deg, var(--blue) 0%, var(--violet-bright) 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero .lead{
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--ink);
+    max-width: 34ch;
+    margin: 0 0 1.1rem;
+  }
+  .hero .sub{
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 40ch;
+    margin: 0 0 1.8rem;
+  }
+  .hero-cta{
+    display:inline-block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--panel-line);
+    border-radius: 3px;
+    color: var(--ink);
+    background: var(--panel);
+  }
+  .hero-cta:hover{
+    text-decoration:none;
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .hero-graphic{ width: 100%; height: auto; display:block; }
+  .node-label{
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    fill: var(--ink);
+  }
+  .signal-line{
+    stroke: var(--blue-dim);
+    stroke-width: 2;
+    stroke-dasharray: 5 9;
+    fill:none;
+    animation: dashflow 3.2s linear infinite;
+  }
+  .ring-hex{ stroke: var(--blue); stroke-width: 2; fill:none; transform-box: fill-box; transform-origin: center; animation: pulse 3.6s ease-in-out infinite; }
+  .ring-echo{ stroke: var(--violet-bright); stroke-width: 2; fill:none; transform-box: fill-box; transform-origin: center; animation: pulse 3.6s ease-in-out infinite 1.8s; }
+  .dot-hex{ fill: var(--blue); }
+  .dot-echo{ fill: var(--violet-bright); }
+
+  @keyframes dashflow{ to{ stroke-dashoffset: -140; } }
+  @keyframes pulse{
+    0%, 100%{ opacity: 0.55; transform: scale(1); }
+    50%{ opacity: 1; transform: scale(1.06); }
+  }
+
+  .hero-enter{ animation: rise 0.7s ease-out both; }
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 3.6rem 0; }
+  .section-head{ max-width: 56ch; margin-bottom: 2.2rem; }
+  h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+    margin: 0 0 0.6rem;
+    color: var(--ink);
+  }
+  .section-head p{ color: var(--muted); margin: 0; font-size: 1.02rem; }
+
+  /* ---------- Systems ---------- */
+  .systems-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+  .sys-card{
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    padding: 1.9rem 1.9rem 2rem;
+    position: relative;
+  }
+  .sys-hex{ border-top: 3px solid var(--blue); }
+  .sys-echo{
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+    border-color: rgba(160,107,255,0.22);
+  }
+  .sys-echo::after{
+    content:"";
+    position:absolute;
+    top:0; right:0;
+    width:0; height:0;
+    border-style: solid;
+    border-width: 0 26px 26px 0;
+    border-color: transparent var(--void-2) transparent transparent;
+  }
+  .status{
+    display:flex;
+    align-items:center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+  }
+  .status .dot{
+    width: 8px; height: 8px; border-radius: 50%; display:inline-block; flex-shrink:0;
+  }
+  .status .dot.blue{ background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .status .dot.violet{ background: var(--violet-bright); box-shadow: 0 0 8px var(--violet-bright); }
+  .sys-card h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+  }
+  .sys-card p{
+    color: var(--muted);
+    margin: 0;
+    max-width: 42ch;
+  }
+  .sys-card p strong{ color: var(--ink); font-weight: 500; }
+
+  /* ---------- Capabilities ---------- */
+  .cap-list{ list-style:none; margin:0; padding:0; }
+  .cap-list li{
+    display:grid;
+    grid-template-columns: 3px 1fr;
+    gap: 1.4rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .cap-list li:first-child{ padding-top: 0; }
+  .cap-list li:last-child{ border-bottom:none; }
+  .cap-list li .bar{ border-radius: 2px; }
+  .cap-list li:nth-child(odd) .bar{ background: var(--blue); }
+  .cap-list li:nth-child(even) .bar{ background: var(--violet-bright); }
+  .cap-list h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .cap-list p{ margin:0; color: var(--muted); max-width: 60ch; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 3rem 0 3.5rem;
+    border-top: 1px solid var(--panel-line);
+  }
+  footer .foot-row{
+    display:flex;
+    align-items:center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+  footer .foot-row .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--blue);
+    box-shadow: 0 0 8px var(--blue);
+    animation: pulse 3.6s ease-in-out infinite;
+  }
+  footer p{ color: var(--muted); margin: 0 0 0.4rem; max-width: 62ch; font-size: 0.95rem; }
+  footer .year{ color: #5f5a72; font-size: 0.85rem; margin-top: 1.1rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 800px){
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .hero{ padding: 3.2rem 0 3rem; text-align:left; }
+    .hero-graphic{ max-width: 360px; margin: 0.5rem auto 0; }
+    .systems-grid{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .signal-line, .ring-hex, .ring-echo, .hero-enter, footer .foot-row .dot{
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <span class="wordmark">team-E.C.H.O</span>
+      <a class="jump" href="#systems">See the systems</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-enter">
+        <h1>team-E.C.H.O</h1>
+        <p class="lead">We build AI systems that run on real hardware, notice real things, and act without waiting to be asked.</p>
+        <p class="sub">Two projects are live right now — HEX and E.C.H.O. Both are early proof that AI can do more than answer questions. More are coming, each one aimed at something stranger than a chatbot.</p>
+        <a class="hero-cta" href="#systems">See the systems</a>
+      </div>
+
+      <svg class="hero-graphic" viewBox="0 0 460 300" role="img" aria-label="Diagram of two connected systems, HEX and E.C.H.O, under team-E.C.H.O">
+        <line x1="128" y1="150" x2="332" y2="150" class="signal-line"/>
+        <circle cx="110" cy="150" r="42" class="ring-hex"/>
+        <circle cx="110" cy="150" r="5" class="dot-hex"/>
+        <text x="110" y="215" text-anchor="middle" class="node-label">HEX</text>
+        <circle cx="350" cy="150" r="42" class="ring-echo"/>
+        <circle cx="350" cy="150" r="5" class="dot-echo"/>
+        <text x="350" y="215" text-anchor="middle" class="node-label">E.C.H.O</text>
+      </svg>
+    </div>
+  </header>
+
+  <section id="systems">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Two systems, one team</h2>
+        <p>Different jobs, same core. Each one is built to notice something most software ignores.</p>
+      </div>
+
+      <div class="systems-grid">
+        <article class="sys-card sys-hex">
+          <div class="status"><span class="dot blue"></span>Running across three machines</div>
+          <h3>HEX</h3>
+          <p>HEX splits itself across a Linux backend, a Windows desktop, and an Android phone, keeping all three in sync over its own network hub. It listens for a wake word, answers out loud through a voice we trained ourselves, and remembers what it's told well enough to bring it up again later. Left alone, it spends its idle time searching, reading, and learning — then quietly files away whatever it found worth keeping.</p>
+        </article>
+
+        <article class="sys-card sys-echo">
+          <div class="status"><span class="dot violet"></span>In active development</div>
+          <h3>E.C.H.O</h3>
+          <p>E.C.H.O grew out of HEX's core, rebuilt to watch a room instead of a chat window. It checks every file that comes in for signs of something hidden, keeps an eye on a 3D printer's telemetry, and senses whether someone's nearby through a motion sensor and a pose model — without ever saving an image. One internal system weighs all of that at once to decide if a person should be interrupted at all.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What un-ordinary looks like</h2>
+        <p>Not a demo, and not a chatbot with a personality bolted on. This is what's actually running.</p>
+      </div>
+
+      <ul class="cap-list">
+        <li>
+          <span class="bar"></span>
+          <div>
+            <h3>Reads a room without recording it</h3>
+            <p>A motion sensor gates a single pose estimate at a time — nothing is ever written to disk.</p>
+          </div>
+        </li>
+        <li>
+          <span class="bar"></span>
+          <div>
+            <h3>Flags what shouldn't be there</h3>
+            <p>Every incoming file gets hashed and checked for hidden data through entropy analysis, automatically.</p>
+          </div>
+        </li>
+        <li>
+          <span class="bar"></span>
+          <div>
+            <h3>Decides whether to interrupt you</h3>
+            <p>One state machine fuses location, motion, screen activity, and even print jobs before deciding if now's a good time.</p>
+          </div>
+        </li>
+        <li>
+          <span class="bar"></span>
+          <div>
+            <h3>Teaches itself between conversations</h3>
+            <p>Idle time goes into searching, reading, and quietly filing away whatever's worth remembering later.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-row">
+        <span class="dot"></span>
+        <span class="wordmark" style="font-size:0.95rem;">team-E.C.H.O</span>
+      </div>
+      <p>Built and run by MythArrow, an independent developer working across AI, hardware, and home automation. More systems are in the pipeline.</p>
+      <p class="year">team-E.C.H.O — 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
